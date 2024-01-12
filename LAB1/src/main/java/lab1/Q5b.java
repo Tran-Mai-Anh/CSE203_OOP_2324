@@ -24,9 +24,11 @@ public class Q5b {
     }
 
     public static void removeRandom(ArrayList a, int n) {
-        int number = reader.nextInt();
-        int index = reader.nextInt();
-        a.add(index, number);
+        System.out.print("Insert ");
+        int insert = reader.nextInt();
+        System.out.print("Position ");
+        int position = reader.nextInt();
+        a.add(position, insert);
         a.remove(a.size() - 1);
         System.out.println(a);
 

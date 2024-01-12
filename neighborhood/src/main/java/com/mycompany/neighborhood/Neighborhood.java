@@ -13,18 +13,18 @@ import java.util.Scanner;
 public class Neighborhood {
 
     public static void main(String[] args) {
-        Neighborhood neighborhood =new Neighborhood();
+        Neighborhood neighborhood = new Neighborhood();
         neighborhood.InputNeighborhood();
         neighborhood.OutputNeighborhood();
-    // Person person1 = new Person();
-                // person1.InputPerson();
-                // Person person2 = new Person("Nguyen Van ","An",12," hoc sinh","1234");
-                // person1.OutputPerson();
-                // person2.OutputPerson();
-         //       Household house = new Household();
-       // house.InputHousehold();
-       // house.OutputHousehold();
-       // System.out.println(house.CountAgeOver60());
+        // Person person1 = new Person();
+        // person1.InputPerson();
+        // Person person2 = new Person("Nguyen Van ","An",12," hoc sinh","1234");
+        // person1.OutputPerson();
+        // person2.OutputPerson();
+        //       Household house = new Household();
+        // house.InputHousehold();
+        // house.OutputHousehold();
+        // System.out.println(house.CountAgeOver60());
 
     }
     //Thuoc tinh
@@ -46,11 +46,10 @@ public class Neighborhood {
             house.add(p);
         }
     }
-    void OutputNeighborhood(){
+
+    void OutputNeighborhood() {
         for (int i = 0; i < house.size(); i++) {
-                house.get(i).OutputHousehold();
-            }
+            house.get(i).OutputHousehold();
         }
     }
-
-
+}

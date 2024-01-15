@@ -21,8 +21,7 @@ public class Household {
     //Phuong thuc
     //1. Khoi tao
     Household(){
-        
-        
+           
     }
     //2. Phuong thuc khac
     void InputHousehold(){

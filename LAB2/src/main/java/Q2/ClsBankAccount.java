@@ -18,15 +18,30 @@ public class ClsBankAccount {
         bankAccount.print();
         Scanner sc = new Scanner(System.in);
         double amount;
-        System.out.print("Amount: ");
+        System.out.print("Deposit money: ");
+        amount = sc.nextDouble();
+        int a;
+        System.out.print("Into the account number: ");
+        a = sc.nextInt();
+        bankAccount.deposit(a, amount);
+        bankAccount.print();
+        System.out.print("Withdraw money: ");
         amount = sc.nextDouble();
         int b;
-        System.out.print("Into the account number: ");
+        System.out.print("From the account number: ");
         b = sc.nextInt();
-        //bankAccount.deposit(b, amount);
-        //bankAccount.print();
-        //bankAccount.withdraw(b, amount);
-        bankAccount.transferMoney(b, amount);
+        bankAccount.withdraw(b, amount);
+        System.out.println();
+        System.out.print("Transfer money: ");
+        amount = sc.nextDouble();
+        int c;
+        int d;
+        System.out.print("From the account number: ");
+        c = sc.nextInt();
+        System.out.print("Into the account number: ");
+        d = sc.nextInt();
+        bankAccount.transferMoney(c, amount);
+
     }
 
 }

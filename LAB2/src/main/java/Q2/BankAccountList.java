@@ -71,21 +71,6 @@ public class BankAccountList {
         } else {
             System.out.println("Withdraw unsuccessful.");
         }
-        /*System.out.print("From the account number: ");
-        int b = sc.nextInt();
-        boolean flag = false;
-        for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).getAccNum() == b) {
-                if (accounts.get(i).withdraw(amount)) {
-                    System.out.print("Withdraw successful.");
-                    flag = true;
-                }
-            }
-        }
-        if (!flag) {
-            System.out.print("Withdraw unsuccessful.");
-        }
-        System.out.println();*/
     }
 
     public void transferMoney() {
@@ -103,25 +88,7 @@ public class BankAccountList {
         } else {
             System.out.println("Transfer unsuccessful.");
         }
-        /*BankAccount toAccNum=
-        boolean flag = false;
         
-        
-        
-        for (int i = 0; i <accounts.size(); i++) {
-            if (accounts.get(i).mAccNum == c) {
-                if (accountsget(i).) {
-                    print();
-                    //System.out.print("Yes");
-                    flag = true;
-                }
-
-            }
-        }
-        if (!flag) {
-            System.out.print("No");
-        }*/
-
     }
 
 }

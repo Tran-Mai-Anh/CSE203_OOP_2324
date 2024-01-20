@@ -8,8 +8,12 @@ package Q3;
  *
  * @author maianhtran
  */
-public class ManageEmployee {
+public class ManageEmployeeSalary {
     public static void main(String [] args){
-        
+        EmployeeList employeeList=new EmployeeList();
+        employeeList.input();
+        employeeList.calculateSalary();
+        employeeList.highestSalary();
+        employeeList.Sort();
     }
 }

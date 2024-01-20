@@ -45,21 +45,25 @@ public class Complex {
     }
 
     public Complex plus(Complex c) {
+        System.out.println("Plus: ");
         Complex result = new Complex(this.re + c.re, this.im + c.im);
         return result;
     }
 
     public Complex minus(Complex c) {
+        System.out.println("Minus: ");
         Complex result = new Complex(this.re - c.re, this.im - c.im);
         return result;
     }
 
     public Complex multiply(Complex c) {
+        System.out.println("Multiply: ");
         Complex result = new Complex(this.re * c.re - this.im * c.im, this.re * c.im + c.re * this.im);
         return result;
     }
 
     public Complex division(Complex c) {
+        System.out.println("Division: ");
         Complex result = new Complex((this.re * c.re + this.im * c.im) / (c.re * c.re + c.im * c.im), (this.im * c.re - this.re * c.im) / (c.re * c.re + c.im * c.im));
         return result;
     }

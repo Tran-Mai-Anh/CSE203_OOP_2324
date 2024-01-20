@@ -4,11 +4,14 @@
  */
 package Q3;
 
+import java.util.Scanner;
+
 /**
  *
  * @author maianhtran
  */
 public class Employee {
+
     String code;
     String fullName;
     int numberOfYearOfService;
@@ -54,15 +57,40 @@ public class Employee {
     public void setBasicSalary(double basicSalary) {
         this.basicSalary = basicSalary;
     }
-    public Employee(){
-        
+
+    public Employee() {
+
     }
-    public Employee(String code,String fullName,int numberOfYearOfService,double salaryCoefficient,double basicSalary){
-        this.code=code;
-        this.fullName=fullName;
-        this.numberOfYearOfService=numberOfYearOfService;
-        this.salaryCoefficient=salaryCoefficient;
-        this.basicSalary=basicSalary;
+
+    public Employee(String code, String fullName, int numberOfYearOfService, double salaryCoefficient, double basicSalary) {
+        this.code = code;
+        this.fullName = fullName;
+        this.numberOfYearOfService = numberOfYearOfService;
+        this.salaryCoefficient = salaryCoefficient;
+        this.basicSalary = basicSalary;
     }
-    
+
+    public void input() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Employee code: ");
+        code = sc.nextLine();
+        System.out.print("Employee's full name: ");
+        fullName = sc.nextLine();
+        System.out.print("Number of years of service: ");
+        numberOfYearOfService = sc.nextInt();
+        System.out.print("Salary coefficient: ");
+        salaryCoefficient = sc.nextDouble();
+        System.out.print("Basic salary: ");
+        basicSalary = sc.nextDouble();
+    }
+
+    public void print() {
+        System.out.println("Employee code: " + code + " Employee's full name: " + fullName + " Number of years of service: " + numberOfYearOfService + " Salary coefficient: " + salaryCoefficient + " Basic salary: " + basicSalary);
+    }
+
+    public double salary() {
+        double salary = salaryCoefficient * basicSalary;
+        return salary;
+    }
+
 }

@@ -12,9 +12,9 @@ import java.util.Scanner;
  */
 public class BankAccount {
 
-    int mAccNum;
-    String mName;
-    double mBalance;
+    private int mAccNum;
+    private String mName;
+    private double mBalance;
 
     public BankAccount() {
 
@@ -24,7 +24,6 @@ public class BankAccount {
         this.mAccNum = mAccNum;
         this.mName = mName;
         this.mBalance = mBalance;
-
     }
 
     public int getAccNum() {
@@ -54,22 +53,29 @@ public class BankAccount {
         System.out.println("Account number: " + mAccNum + " Full name: " + mName + " Account balance: " + mBalance);
     }
 
-    public double deposit(double amount) {
+    public String toString() {
+        return "Account number: " + mAccNum + " Full name: " + mName + " Account balance: " + mBalance;
+    }
+
+    public void deposit(double amount) {
         mBalance += amount;
-        return mBalance;
+        print();
     }
 
     public boolean withdraw(double amount) {
-        if (amount < mBalance) 
+        if (amount <= mBalance) {
+            mBalance-=amount;
+            print();
             return true;
+        }
         return false;
     }
 
     public boolean transferMoney(BankAccount b, double amount) {
-
         if (amount <= mBalance) {
-            this.mBalance -= amount;
-            b.mBalance += amount;
+            mBalance -= amount;
+            b.deposit(amount);
+            print();
             return true;
         }
         return false;

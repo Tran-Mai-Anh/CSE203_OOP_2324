@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author maianhtran
  */
-public class Person {
+public class Person{
 
     //Thuoc tinh
     String firstName;
@@ -24,12 +24,13 @@ public class Person {
     Person() {
 
     }
-    Person(String firstName, String lastName,int age, String occupation,String identityCardNumber){
-        this.firstName=firstName;// this de goi bien trung ten
-        this.lastName=lastName;
-        this.age=age;
-        this.occupation=occupation;
-        this.identityCardNumber=identityCardNumber;
+
+    Person(String firstName, String lastName, int age, String occupation, String identityCardNumber) {
+        this.firstName = firstName;// this de goi bien trung ten
+        this.lastName = lastName;
+        this.age = age;
+        this.occupation = occupation;
+        this.identityCardNumber = identityCardNumber;
     }
 
     //2. Các phương thức khác   

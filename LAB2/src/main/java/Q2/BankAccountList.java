@@ -87,8 +87,25 @@ public class BankAccountList {
             System.out.println("Transfer successful.");
         } else {
             System.out.println("Transfer unsuccessful.");
-        }
-        
+        }      
     }
+    /*public void transferMoney2(){
+        Scanner sc =new Scanner(System.in);
+        System.out.print("Transfer money: ");
+        double amount = sc.nextDouble();
+        System.out.print("From the account number: ");
+        int fromAccNum = sc.nextInt();
+        System.out.print("Into the account number: ");i
+        int toAccNum = sc.nextInt();
+        for(int i=0;i<accounts.size();i++){
+            if(accounts.get(i).getAccNum()==fromAccNum){
+                if(accounts.get(i).transferMoney(accounts.get(i).getAccNum(i), amount)){
+                    System.out.print("YES");
+                }
+                else
+                    System.out.println("NO");
+            }
+        }
+    }*/
 
 }

@@ -11,4 +11,5 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>lab2.lab3.LAB3</exec.mainClass>
     </properties>
+    <name>LAB3</name>
 </project>

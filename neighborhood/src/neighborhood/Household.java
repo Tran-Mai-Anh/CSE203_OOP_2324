@@ -6,6 +6,7 @@ package com.mycompany.neighborhood;
 
 
 
+import com.mycompany.neighborhood.Person;
 import java.util.ArrayList;
 import java.util.Scanner;
 

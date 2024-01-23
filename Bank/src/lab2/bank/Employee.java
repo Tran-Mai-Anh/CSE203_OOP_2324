@@ -4,6 +4,7 @@
  */
 package lab2.bank;
 
+import com.mycompany.neighborhood.Person;
 import java.util.Scanner;
 
 /**

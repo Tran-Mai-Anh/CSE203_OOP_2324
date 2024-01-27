@@ -4,20 +4,20 @@
  */
 package Q2;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
  *
  * @author maianhtran
  */
-
 public abstract class Employee {
 
-    String employeeID;
-    private String employeeName;
-    private int yearOfBirth;
-    private String address;
-    private String phone;
+    protected String employeeID;
+    protected String employeeName;
+    protected int yearOfBirth;
+    protected String address;
+    protected String phone;
 
     public Employee() {
 
@@ -70,27 +70,26 @@ public abstract class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-    public void input(){
-        Scanner sc=new Scanner(System.in);
+
+    public void input() {
+        Scanner sc = new Scanner(System.in);
         System.out.print("Employee ID: ");
-        employeeID=sc.nextLine();
+        employeeID = sc.nextLine();
         System.out.print("Employee name: ");
-        employeeName=sc.nextLine();
+        employeeName = sc.nextLine();
         System.out.print("Year of birth: ");
-        yearOfBirth=sc.nextInt();
+        yearOfBirth = sc.nextInt();
+        sc.nextLine();
         System.out.print("Address: ");
-        address=sc.nextLine();
+        address = sc.nextLine();
         System.out.print("Phone: ");
-        phone=sc.nextLine();
+        phone = sc.nextLine();
     }
-    
-    public void output(){
-        System.out.println("Employee ID: "+employeeID+" Employee name: "+employeeName+" Year of birth: "+yearOfBirth+" Address: "+address+" Phone: "+phone);
-    }
+   
+
     
     public abstract String getInfo();
-    
+
     public abstract float getPayment();
 
 }

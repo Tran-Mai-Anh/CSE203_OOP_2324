@@ -97,6 +97,11 @@ public class CD {
     }
 
     public void print() {
-        System.out.println("CD Id: " + CDId + " CD collection: " + CDcollection + " CD type: " + CDtype + " Title: " + Title + " Price: " + Price + " Year of release: " + yearOfRelease);
+        System.out.println(" - CD Id: " + CDId
+                + " -  CD collection: " + CDcollection
+                + " - CD type: " + CDtype
+                + " - Title: " + Title
+                + " - Price: " + Price
+                + " - Year of release: " + yearOfRelease);
     }
 }

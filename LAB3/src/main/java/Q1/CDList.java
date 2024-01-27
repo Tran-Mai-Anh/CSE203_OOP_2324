@@ -32,14 +32,13 @@ public class CDList {
 
     public void add() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the number of CD: ");
+        System.out.print("Enter the number of CDs: ");
         int n = sc.nextInt();
         for (int i = 0; i < n; i++) {
             CD cd = new CD();
             cd.input();
             CDs.add(cd);
         }
-        displayAllCDs();
     }
 
     public void searchTitle() {

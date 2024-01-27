@@ -72,18 +72,20 @@ public class List {
     public void searchById() {
         Scanner sc = new Scanner(System.in);
         System.out.print(" - Enter employee's Id: ");
-        String Id = sc.nextLine();
+        String Id = sc.next();
         boolean flag = false;
         for (int i = 0; i < FullList.size(); i++) {
-            if (FullList.get(i).employeeID.equalsIgnoreCase(Id)) {
+            if (FullList.get(i).getEmployeeID().equalsIgnoreCase(Id)) {
                 System.out.println(FullList.get(i).getInfo());
                 flag = true;
+                break;
             }
         }
         for (int i = 0; i < PartList.size(); i++) {
-            if (FullList.get(i).employeeID.equalsIgnoreCase(Id)) {
+            if (PartList.get(i).getEmployeeID().equalsIgnoreCase(Id)) {
                 System.out.println(PartList.get(i).getInfo());
                 flag = true;
+                break;
             }
         }
 
@@ -168,7 +170,7 @@ public class List {
 
         Comparator<Employee> com = new Comparator<Employee>() {
             public int compare(Employee e1, Employee e2) {
-                
+
                 if (e1.yearOfBirth == e2.yearOfBirth) {
                     if (e1.getPayment() > e2.getPayment()) {
                         return -1;
@@ -189,10 +191,10 @@ public class List {
 
         System.out.println("Sort Full-time employee: ");
         FullList.sort(com);
-        //outputFullTime();
+        outputFullTime();
         System.out.println("Sort Part-time employee: ");
         PartList.sort(com);
-        outputAll();
+        outputPartTime();
     }
 
 }

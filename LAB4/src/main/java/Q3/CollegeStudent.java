@@ -10,11 +10,15 @@ import java.util.Scanner;
  *
  * @author maianhtran
  */
-public class College extends Student {
+public class CollegeStudent extends Student {
 
     private double graduationExamScores;
+    
+    public CollegeStudent(){
+        
+    }
 
-    public College(double graduationExamScores, String studentNumber, String fullName, int credits, double avgScore) {
+    public CollegeStudent(double graduationExamScores, String studentNumber, String fullName, int credits, double avgScore) {
         super(studentNumber, fullName, credits, avgScore);
         this.graduationExamScores = graduationExamScores;
     }
@@ -39,5 +43,15 @@ public class College extends Student {
     public void output() {
         super.output();
         System.out.print(" - Graduation exam scores: " + graduationExamScores);
+    }
+
+    @Override
+    public boolean graduation() {
+        super.getCredits();
+        super.getAvgScore();
+        if (getCredits() >= 100 && getAvgScore() >= 5 && graduationExamScores >= 5) {
+            return true;
+        }
+        return false;
     }
 }

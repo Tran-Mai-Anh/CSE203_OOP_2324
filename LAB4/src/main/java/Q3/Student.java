@@ -10,12 +10,16 @@ import java.util.Scanner;
  *
  * @author maianhtran
  */
-public class Student {
+public abstract class Student {
 
     private String studentNumber;
     private String fullName;
     private int credits;
     private double avgScore;
+    
+    public Student(){
+        
+    }
 
     public Student(String studentNumber, String fullName, int credits, double avgScore) {
         this.studentNumber = studentNumber;
@@ -48,18 +52,18 @@ public class Student {
         this.credits = credits;
     }
 
-    public double getScore() {
+    public double getAvgScore() {
         return avgScore;
     }
 
-    public void setScore(double score) {
+    public void setAvgScore(double score) {
         this.avgScore = avgScore;
     }
 
     public void input() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Student number: ");
-        studentNumber = sc.next();
+        studentNumber = sc.nextLine();
         System.out.print("Student's full name: ");
         fullName = sc.nextLine();
         System.out.print("Total number of credits earned: ");
@@ -74,5 +78,7 @@ public class Student {
                 + " - Total number of credits earned: " + credits
                 + " - Average score: " + avgScore);
     }
-
+    
+    public abstract boolean graduation();
+    
 }

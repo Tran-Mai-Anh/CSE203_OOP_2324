@@ -13,14 +13,27 @@ import java.util.Scanner;
  */
 public class Dictionary {
 
-    static Scanner sc = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        findWords();
+    public Dictionary() {
     }
 
-    public static void findWords() {
-        HashMap<String, String> dic = new HashMap<>();
+    static Scanner sc = new Scanner(System.in);
+
+    HashMap<String, String> dic = new HashMap<>();
+
+    public static void main(String[] args) {
+        Dictionary dic = new Dictionary();
+        dic.input();
+        System.out.print("Enter words: ");
+        String word = sc.next();
+        if (dic.Check(word)) {
+            System.out.println("Word exists.");
+        } else {
+            System.out.println("Word not exist.");
+        }
+        dic.findMeaning(word);
+    }
+
+    public void input() {
         dic.put("apple", "quả táo");
         dic.put("banana", "quả chuối");
         dic.put("orange", "quả cam");
@@ -31,13 +44,18 @@ public class Dictionary {
         dic.put("fig", "quả sung");
         dic.put("watermelon", "quả dưa hấu");
         dic.put("pear", "quả lê");
-        System.out.print("Enter words: ");
-        String word = sc.next();
+    }
+
+    public boolean Check(String word) {
         if (dic.containsKey(word)) {
-            System.out.println("Word exists.");
+            return true;
+        }
+        return false;
+    }
+
+    public void findMeaning(String word) {
+        if (Check(word)) {
             System.out.println("Meaning: " + dic.get(word));
-        } else {
-            System.out.println("Word does not exist.");
         }
     }
 

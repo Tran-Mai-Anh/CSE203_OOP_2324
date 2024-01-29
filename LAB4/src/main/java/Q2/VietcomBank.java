@@ -8,6 +8,10 @@ package Q2;
  *
  * @author maianhtran
  */
-public class VietcomBank {
+public class VietcomBank implements IBank{
+    @Override
+    public String getBankName(){
+        return "VIETCOMBANK";
+    }
     
 }

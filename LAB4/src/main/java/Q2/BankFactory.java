@@ -8,6 +8,8 @@ package Q2;
  *
  * @author maianhtran
  */
-public class BankFactory {
+public class BankFactory extends Client {
     
 }
+
+

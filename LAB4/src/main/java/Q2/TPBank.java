@@ -8,6 +8,11 @@ package Q2;
  *
  * @author maianhtran
  */
-public class TPBank {
-    
+public class TPBank extends Client implements IBank {
+
+    @Override
+    public String getBankName() {
+        return "TPBANK";
+    }
+
 }

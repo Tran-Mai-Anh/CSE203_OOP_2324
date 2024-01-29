@@ -8,6 +8,7 @@ package Q2;
  *
  * @author maianhtran
  */
-public class IBank {
+public interface IBank {
+    public String getBankName();
     
 }

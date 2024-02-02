@@ -57,7 +57,7 @@ public class List {
                 count++;
             }
         }
-        System.out.println("The number of eligible students." + count);
+        System.out.println("The number of eligible students: " + count);
     }
 
     public void sort() {

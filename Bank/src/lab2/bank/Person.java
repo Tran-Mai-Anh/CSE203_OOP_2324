@@ -82,14 +82,25 @@ public class Person {
     }
 
     //2. Các phương thức khác 
-    public void InputPerson() {
+    public void InputPerson() throws EmployeeException {
         Scanner sc = new Scanner(System.in);
         System.out.print("First name: ");
         firstName = sc.nextLine();
         System.out.print("Last name: ");
         lastName = sc.nextLine();
-        System.out.print("Age: ");
-        age = sc.nextInt();
+        //System.out.print("Age: ");
+        //age = sc.nextInt();
+        try {
+            System.out.print("Age: ");
+            age = sc.nextInt();
+            // flag=false;
+        } catch (Exception ex) {
+            // throw new EmployeeeException ("Age is number!);
+            System.out.println(ex.getMessage());
+        }
+        if (age <= 0) {
+            throw new EmployeeException("Age invalid!");
+        }
         sc.nextLine();
         System.out.print("Occupation: ");
         occupation = sc.nextLine();
@@ -98,7 +109,11 @@ public class Person {
     }
 
     public void OutputPerson() {
-        System.out.println("First name: " + firstName + " Last name: " + lastName + " Age: " + age + " Occupation: " + occupation + " Identity card number: " + identityCardNumber);
+        System.out.println("First name: " + firstName
+                + " Last name: " + lastName
+                + " Age: " + age
+                + " Occupation: " + occupation
+                + " Identity card number: " + identityCardNumber);
     }
 
 }

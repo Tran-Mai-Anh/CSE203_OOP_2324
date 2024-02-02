@@ -58,5 +58,4 @@ public class Dictionary {
             System.out.println("Meaning: " + dic.get(word));
         }
     }
-
 }

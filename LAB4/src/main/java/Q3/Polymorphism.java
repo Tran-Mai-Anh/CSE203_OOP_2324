@@ -15,29 +15,6 @@ public class Polymorphism {
 
     static Scanner sc = new Scanner(System.in);
 
-    /*private ArrayList<Employee> arrs = new ArrayList<>();
-    public void input(){
-        System.out.print("N: ");
-        int n;
-        n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            Student student;
-            System.out.print("1: College student; 2: University student");
-            int k = sc.nextInt();
-            switch (k) {
-                case 1:
-                    student = new CollegeStudent();
-                    student.input();
-                    arrs.add(employee);
-                    break;
-                case 2:
-                    employee = new Teller();
-                    employee.InputPerson();
-                    arrs.add(employee);
-                    break;
-            }
-        }
-    }*/
     public static void main(String[] args) {
         List list = new List();
         int menu;
@@ -66,13 +43,13 @@ public class Polymorphism {
                     list.PrintStudentList();
                     break;
                 case 5:
-                    //list.;
+                    list.StudentGraduation();
                     break;
                 case 6:
-                    //list.;
+                    list.sort();
                     break;
                 case 7:
-                    //list.;
+                    list.findStudentName();
                     break;
                 case 8:
                     break;

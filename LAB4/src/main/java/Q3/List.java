@@ -4,6 +4,7 @@
  */
 package Q3;
 
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -34,7 +35,7 @@ public class List {
         System.out.print("Enter student's code: ");
         String code = sc.next();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStudentNumber() == code) {
+            if (list.get(i).getStudentNumber().equalsIgnoreCase(code)) {
                 list.remove(i);
             }
         }
@@ -42,19 +43,52 @@ public class List {
 
     public void PrintStudentList() {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+            list.get(i).output();
+            System.out.println();
         }
     }
 
     public void StudentGraduation() {
-        int count=0;
+        int count = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).graduation()) {
-                System.out.println(list.get(i));
+                list.get(i).output();
+                System.out.println();
                 count++;
             }
         }
-        System.out.println(count);
+        System.out.println("The number of eligible students." + count);
+    }
+
+    public void sort() {
+
+        Comparator<Student> com = new Comparator<Student>() {
+            public int compare(Student s1, Student s2) {
+
+                if (s1 instanceof CollegeStudent && s2 instanceof UniversityStudent) {
+                    return -1; 
+                } else if (s1 instanceof UniversityStudent && s2 instanceof CollegeStudent) {
+                    return 1; 
+                } else {
+                    return s1.getStudentNumber().compareTo(s2.getStudentNumber());
+                }
+            }
+        };
+        list.sort(com);
+        PrintStudentList();
+
+    }
+
+    public void findStudentName() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter student's name: ");
+        String n = sc.nextLine();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getFullName().contains(n)) {
+                list.get(i).output();
+                System.out.println();
+            }
+        }
     }
 
 }

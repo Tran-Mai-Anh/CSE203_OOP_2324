@@ -16,9 +16,9 @@ public abstract class Student {
     private String fullName;
     private int credits;
     private double avgScore;
-    
-    public Student(){
-        
+
+    public Student() {
+
     }
 
     public Student(String studentNumber, String fullName, int credits, double avgScore) {
@@ -76,9 +76,9 @@ public abstract class Student {
         System.out.print(" - Student number: " + studentNumber
                 + " - Student's full name: " + fullName
                 + " - Total number of credits earned: " + credits
-                + " - Average score: " + avgScore);
+                + " - Average score: " + avgScore );
     }
-    
+
     public abstract boolean graduation();
-    
+
 }

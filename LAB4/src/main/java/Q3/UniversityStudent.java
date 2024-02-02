@@ -54,7 +54,7 @@ public class UniversityStudent extends Student {
     @Override
     public void output() {
         super.output();
-        System.out.print(" - Thesis name: " + thesisName + "Thesis score: " + thesisScore);
+        System.out.print(" - Thesis name: " + thesisName + " - Thesis score: " + thesisScore);
     }
 
     @Override
@@ -66,5 +66,7 @@ public class UniversityStudent extends Student {
         }
         return false;
     }
+    
+    
 
 }

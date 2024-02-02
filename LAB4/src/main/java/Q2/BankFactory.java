@@ -8,8 +8,20 @@ package Q2;
  *
  * @author maianhtran
  */
-public class BankFactory extends Client {
-    
+enum BankType {
+    TPBank,
+    VietcomBank;
 }
 
+public class BankFactory {
 
+    public static Bank getBankName(BankType bankType) {
+        switch (bankType) {
+            case TPBank:
+                return new TPBank();
+            case VietcomBank:
+                return new VietcomBank();
+        }
+        return null;
+    }
+}

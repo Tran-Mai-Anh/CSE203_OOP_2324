@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author maianhtran
  */
-public class Form extends JFrame {
+public class ResortForm extends JFrame {
 
     private JTextField name;
     private JButton calculateButton;
@@ -19,7 +19,7 @@ public class Form extends JFrame {
     private JComboBox<String> weeks;
     private JCheckBox meal1, meal2, meal3;
 
-    public Form() {
+    public ResortForm() {
 
         setTitle("This is my First Frame");
         setSize(455, 350);
@@ -27,30 +27,30 @@ public class Form extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel inputPanel = new JPanel();
-        JPanel panel = new JPanel(new GridLayout(1, 2, 5, 0));
-        JPanel panel1 = new JPanel(new GridLayout(1, 3, 10, 5));
 
-        label1 = new JLabel("Resort Price Calculator", JLabel.CENTER);
-        label1.setFont(new Font("Arial", Font.BOLD, 40));
-        label2 = new JLabel("Base price for a room is $200", JLabel.CENTER);
-        label2.setFont(new Font("Arial", Font.BOLD, 25));
-        label3 = new JLabel("Choose options that you want", JLabel.CENTER);
-        label3.setFont(new Font("Arial", Font.BOLD, 25));
-        nameField = new JLabel("Guest Name:");
-        nameField.setFont(new Font("Arial", Font.BOLD, 15));
-        name = new JTextField();
-        meal1 = new JCheckBox("Breakfast $20");
-        meal1.setFont(new Font("Arial", Font.BOLD, 15));
-        meal2 = new JCheckBox("Goft $50");
-        meal2.setFont(new Font("Arial", Font.BOLD, 15));
-        meal3 = new JCheckBox("Pool $15");
-        meal3.setFont(new Font("Arial", Font.BOLD, 15));
         String s[] = {"Week day(-10%)", "Weekend(+30%)"};
+
+        label1 = new JLabel("Resort Price Calculator");
+        label2 = new JLabel("Base price for a room is $200");
+        label3 = new JLabel("Choose options that you want  ");
+        nameField = new JLabel("Guest Name:");
+        name = new JTextField(25);
+        meal1 = new JCheckBox("Breakfast $20");
+        meal2 = new JCheckBox("Goft $50");
+        meal3 = new JCheckBox("Pool $15");
         weeks = new JComboBox(s);
-        weeks.setFont(new Font("Arial", Font.BOLD, 15));
         calculateButton = new JButton("Calculate");
-        calculateButton.setFont(new Font("Arial", Font.BOLD, 15));
         outputLabel = new JLabel();
+
+        label1.setFont(new Font("Arial", Font.BOLD, 40));
+        label2.setFont(new Font("Arial", Font.BOLD, 25));
+        label3.setFont(new Font("Arial", Font.BOLD, 25));
+        nameField.setFont(new Font("Arial", Font.BOLD, 15));
+        meal1.setFont(new Font("Arial", Font.BOLD, 15));
+        meal2.setFont(new Font("Arial", Font.BOLD, 15));
+        meal3.setFont(new Font("Arial", Font.BOLD, 15));
+        weeks.setFont(new Font("Arial", Font.BOLD, 15));
+        calculateButton.setFont(new Font("Arial", Font.BOLD, 15));
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(meal1);
@@ -60,13 +60,11 @@ public class Form extends JFrame {
         inputPanel.add(label1);
         inputPanel.add(label2);
         inputPanel.add(label3);
-        panel.add(nameField);
-        panel.add(name);
-        inputPanel.add(panel);
-        panel1.add(meal1);
-        panel1.add(meal2);
-        panel1.add(meal3);
-        inputPanel.add(panel1);
+        inputPanel.add(nameField);
+        inputPanel.add(name);
+        inputPanel.add(meal1);
+        inputPanel.add(meal2);
+        inputPanel.add(meal3);
         inputPanel.add(weeks);
         inputPanel.add(calculateButton);
         inputPanel.add(outputLabel);
@@ -80,7 +78,7 @@ public class Form extends JFrame {
     private void calculateButton() {
         String name1 = name.getText().trim();
         if (name1.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Guest name can not be empty", "Guest name can not be empty", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Guest name can not be empty");
             return;
         }
 
@@ -108,4 +106,3 @@ public class Form extends JFrame {
     }
 
 }
-

@@ -10,7 +10,7 @@ package Q2;
  */
 public class ResortPriceCalculator {
     public static void main(String[]args){
-        new Form().setVisible(true);
+        new ResortForm().setVisible(true);
     }
 }
 

@@ -87,6 +87,7 @@ public class List {
         };
         list.sort(com);
         PrintStudentList();
+        saveUniversity();
 
     }
 
@@ -101,10 +102,10 @@ public class List {
             }
         }
     }
-
+    String fileName = "University6.Dat";
     public void saveUniversity() {
         try {
-            FileOutputStream f = new FileOutputStream("University.DAT");
+            FileOutputStream f = new FileOutputStream(fileName);
             ObjectOutputStream oStream = new ObjectOutputStream(f);
             oStream.writeObject(list);
             oStream.close();
@@ -115,7 +116,7 @@ public class List {
 
     public void loadUniversity() {
         try {
-            FileInputStream f = new FileInputStream("University.DAT");
+            FileInputStream f = new FileInputStream(fileName);
             ObjectInputStream inStream = new ObjectInputStream(f);
             list = (Vector<Student>) inStream.readObject();
             inStream.close();

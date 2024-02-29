@@ -13,3 +13,5 @@ public class ResortPriceCalculator {
         new Form().setVisible(true);
     }
 }
+
+

@@ -42,16 +42,6 @@ public class ResortForm extends JFrame {
         calculateButton = new JButton("Calculate");
         outputLabel = new JLabel();
 
-        label1.setFont(new Font("Arial", Font.BOLD, 40));
-        label2.setFont(new Font("Arial", Font.BOLD, 25));
-        label3.setFont(new Font("Arial", Font.BOLD, 25));
-        nameField.setFont(new Font("Arial", Font.BOLD, 15));
-        meal1.setFont(new Font("Arial", Font.BOLD, 15));
-        meal2.setFont(new Font("Arial", Font.BOLD, 15));
-        meal3.setFont(new Font("Arial", Font.BOLD, 15));
-        weeks.setFont(new Font("Arial", Font.BOLD, 15));
-        calculateButton.setFont(new Font("Arial", Font.BOLD, 15));
-
         ButtonGroup bg = new ButtonGroup();
         bg.add(meal1);
         bg.add(meal2);
@@ -68,6 +58,16 @@ public class ResortForm extends JFrame {
         inputPanel.add(weeks);
         inputPanel.add(calculateButton);
         inputPanel.add(outputLabel);
+
+        label1.setFont(new Font("Arial", Font.BOLD, 40));
+        label2.setFont(new Font("Arial", Font.BOLD, 25));
+        label3.setFont(new Font("Arial", Font.BOLD, 25));
+        nameField.setFont(new Font("Arial", Font.BOLD, 15));
+        meal1.setFont(new Font("Arial", Font.BOLD, 15));
+        meal2.setFont(new Font("Arial", Font.BOLD, 15));
+        meal3.setFont(new Font("Arial", Font.BOLD, 15));
+        weeks.setFont(new Font("Arial", Font.BOLD, 15));
+        calculateButton.setFont(new Font("Arial", Font.BOLD, 15));
 
         calculateButton.addActionListener(e -> calculateButton());
 

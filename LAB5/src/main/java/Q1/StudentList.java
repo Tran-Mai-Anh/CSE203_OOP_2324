@@ -18,25 +18,25 @@ import javax.swing.JOptionPane;
  *
  * @author maianhtran
  */
-public class List {
+public class StudentList {
 
-    Vector<Student> list = new Vector<>();
+    Vector<Student> studentList = new Vector<>();
 
-    public List() {
+    public StudentList() {
         loadUniversity();
     }
 
     public void AddCollegeStudent() {
         Student student = new CollegeStudent();
         student.input();
-        list.add(student);
+        studentList.add(student);
         saveUniversity();
     }
 
     public void AddUniversityStudent() {
         Student student = new UniversityStudent();
         student.input();
-        list.add(student);
+        studentList.add(student);
         saveUniversity();
     }
 
@@ -44,26 +44,26 @@ public class List {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter student's code: ");
         String code = sc.next();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStudentNumber().equalsIgnoreCase(code)) {
-                list.remove(i);
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getStudentNumber().equalsIgnoreCase(code)) {
+                studentList.remove(i);
             }
         }
         saveUniversity();
     }
 
     public void PrintStudentList() {
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).output();
+        for (int i = 0; i < studentList.size(); i++) {
+            studentList.get(i).output();
             System.out.println();
         }
     }
 
     public void StudentGraduation() {
         int count = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).graduation()) {
-                list.get(i).output();
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).graduation()) {
+                studentList.get(i).output();
                 System.out.println();
                 count++;
             }
@@ -85,7 +85,7 @@ public class List {
                 }
             }
         };
-        list.sort(com);
+        studentList.sort(com);
         PrintStudentList();
         saveUniversity();
 
@@ -95,9 +95,9 @@ public class List {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter student's name: ");
         String n = sc.nextLine();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getFullName().contains(n)) {
-                list.get(i).output();
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getFullName().contains(n)) {
+                studentList.get(i).output();
                 System.out.println();
             }
         }
@@ -107,7 +107,7 @@ public class List {
         try {
             FileOutputStream f = new FileOutputStream(fileName);
             ObjectOutputStream oStream = new ObjectOutputStream(f);
-            oStream.writeObject(list);
+            oStream.writeObject(studentList);
             oStream.close();
         } catch (IOException e) {
             System.out.println("Error save file"+ e.getMessage());
@@ -118,7 +118,7 @@ public class List {
         try {
             FileInputStream f = new FileInputStream(fileName);
             ObjectInputStream inStream = new ObjectInputStream(f);
-            list = (Vector<Student>) inStream.readObject();
+            studentList = (Vector<Student>) inStream.readObject();
             inStream.close();
         } catch (ClassNotFoundException e) {
             System.out.println("Class not found");

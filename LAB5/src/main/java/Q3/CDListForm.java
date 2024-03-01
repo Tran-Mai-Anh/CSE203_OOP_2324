@@ -36,6 +36,9 @@ public class CDListForm extends JFrame {
     private JComboBox collectionCombobox;
     private JButton addButton, clearButton, showAllButton;
     private JLabel idLabel, titleLabel, collectionLabel, typeLabel, vcdLabel, cdLabel, priceLabel, yearLabel;
+    private JList<String> cdList;
+    private DefaultListModel<String> listModel;
+    private ArrayList<CD> cds;
 
     public CDListForm() {
         setTitle("Quach Tinh_CD Store");
@@ -65,6 +68,9 @@ public class CDListForm extends JFrame {
         cdLabel = new JLabel("CD");
         priceLabel = new JLabel("CD Price");
         yearLabel = new JLabel("CD Year of Release");
+        listModel = new DefaultListModel<>();
+        cdList = new JList<>(listModel);
+        JScrollPane listScrollPane = new JScrollPane(cdList);
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(vcdRadioButton);
@@ -107,122 +113,87 @@ public class CDListForm extends JFrame {
         showAllButton.addActionListener(e -> displayAllCDs());
 
         add(inputPanel);
-        
+
         CDs = new ArrayList<>();
         loadCDs();
 
     }
 
     public void displayAllCDs() {
-        for (int i = 0; i < CDs.size(); i++) {
+        /*for (int i = 0; i < CDs.size(); i++) {
             CDs.get(i).print();
-        }
+        }*/
+        int selectedIndex = cdList.getSelectedIndex();
+        CD cd = CDs.get(selectedIndex);
+        JOptionPane.showMessageDialog(this,
+                "CD ID: " + cd.getCDId()
+                + "\nCD Title: " + cd.getTitle()
+                + "\nCD Collection: " + cd.getCDcollection()
+                + "\nCD Type: " + cd.getCDtype()
+                + "\nCD Price: " + cd.getPrice()
+                + "\nCD Year of Release: " + cd.getYearOfRelease()
+        );
+
     }
 
     public void addCDs() {
-        String id=idTextField.getText();
-        String title=titleTextField.getText();
-        ActionListener[] collection=collectionCombobox.getActionListeners();
-        ActionListener[] vcd=vcdRadioButton.getActionListeners();
-        ActionListener[] cd=cdRadioButton.getActionListeners();
+        String id = idTextField.getText();
+        String title = titleTextField.getText();
+        ActionListener[] collection = collectionCombobox.getActionListeners();
+        ActionListener[] vcd = vcdRadioButton.getActionListeners();
+        ActionListener[] cd = cdRadioButton.getActionListeners();
         double price = Double.parseDouble(priceTextField.getText());
         int year = Integer.parseInt(yearTextField.getText());
-        
-        if(id.isEmpty()||title.isEmpty()){
-            
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "CD ID can not be empty");
+            return;
+        } else if (title.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "CD Title can not be empty");
+            return;
         }
-        
-       // CD cd1=new CD(id,title,collection,vcd,cd,price,year);
-       // CDs.add(cd1);
-        
+        else if(Double.parseDouble(priceTextField.getText())) {
+            //Double.parseDouble(priceTextField.getText());
+            JOptionPane.showMessageDialog(this, "CD Price should be numbers");
+            return;
+        } catch (NumberFormatException e) {
+
+        }
+        try {
+            Double.parseDouble(yearTextField.getText());
+            JOptionPane.showMessageDialog(this, "CD Year of Release should be numbers");
+            return;
+        } catch (NumberFormatException e) {
+
+        }
+
+       // CD cd2 = new CD(id, title, collection, vcd, cd, price, year);
+
+        //CDs.add(cd2);
+        //listModel.addElement(cd2.getCDId());
+
         saveCDs();
         clearFields();
-        
-        /*System.out.print("Enter the number of CDs: ");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            CD cd = new CD();
-            cd.input();
-            CDs.add(cd);
-        }*/
+
     }
-    
+
     private void clearFields() {
         idTextField.setText("");
         titleTextField.setText("");
         priceTextField.setText("");
         yearTextField.setText("");
-        
+
+        collectionCombobox.setSelectedIndex(0);
+
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(vcdRadioButton);
+        bg.add(cdRadioButton);
+        bg.clearSelection();
+
     }
 
-    /*public void searchTitle() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the CD title: ");
-        String n = sc.nextLine();
-        for (int i = 0; i < CDs.size(); i++) {
-            if (CDs.get(i).getTitle().equalsIgnoreCase(n)) {
-                CDs.get(i).print();
-                break;
-            }
-        }
-    }
-
-    public void searchCollection() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the collection: ");
-        String n = sc.nextLine();
-        for (int i = 0; i < CDs.size(); i++) {
-            if (CDs.get(i).getCDcollection().equalsIgnoreCase(n)) {
-                CDs.get(i).print();
-            }
-        }
-    }
-
-    public void searchType() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the type: ");
-        String n = sc.nextLine();
-        for (int i = 0; i < CDs.size(); i++) {
-            if (CDs.get(i).getCDtype().equalsIgnoreCase(n)) {
-                CDs.get(i).print();
-            }
-        }
-    }
-
-    public void deleteId() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the CD Id: ");
-        String n = sc.nextLine();
-        for (int i = 0; i < CDs.size(); i++) {
-            if (CDs.get(i).getCDId().equalsIgnoreCase(n)) {
-                CDs.remove(i);
-            }
-        }
-    }
-
-    public void editInformation() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the CD Id: ");
-        String n = sc.nextLine();
-        for (int i = 0; i < CDs.size(); i++) {
-            if (CDs.get(i).getCDId().equalsIgnoreCase(n)) {
-                CDs.get(i).input();
-                CDs.get(i).setCDId(n);
-            }
-        }
-    }
-
-    public void sort() {
-        Comparator<CD> com = new Comparator<CD>() {
-            public int compare(CD o1, CD o2) {
-                return o1.getYearOfRelease() - o2.getYearOfRelease();
-            }
-        };
-        CDs.sort(com);
-        displayAllCDs();
-    }*/
-    
     String fileName = "CD.Dat";
+
     public void saveCDs() {
         try {
             FileOutputStream f = new FileOutputStream(fileName);
@@ -230,7 +201,7 @@ public class CDListForm extends JFrame {
             oStream.writeObject(CDs);
             oStream.close();
         } catch (IOException e) {
-            System.out.println("Error save file"+ e.getMessage());
+            System.out.println("Error save file" + e.getMessage());
         }
     }
 

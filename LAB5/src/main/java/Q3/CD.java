@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Q1;
+package Q3;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  *
  * @author maianhtran
  */
-public class CD {
+public class CD implements Serializable {
 
     private String CDId;
     private String CDcollection;

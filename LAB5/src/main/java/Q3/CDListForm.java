@@ -8,7 +8,7 @@ package Q3;
  *
  * @author maianhtran
  */
-import Q1.CD;
+import Q3.CD;
 import Q1.Student;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,6 +47,7 @@ public class CDListForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel inputPanel = new JPanel();
+        JPanel mainPanel=new JPanel(new BorderLayout());
 
         String[] c = {"game", "movie", "music"};
 
@@ -107,10 +108,12 @@ public class CDListForm extends JFrame {
         addButton.setFont(new Font("Arial", Font.BOLD, 15));
         clearButton.setFont(new Font("Arial", Font.BOLD, 15));
         showAllButton.setFont(new Font("Arial", Font.BOLD, 15));
+        
+        mainPanel.add(listScrollPane, BorderLayout.CENTER);
 
         addButton.addActionListener(e -> addCDs());
         clearButton.addActionListener(e -> clearFields());
-        showAllButton.addActionListener(e -> displayAllCDs());
+        showAllButton.addActionListener(e -> showAllCDs());
 
         add(inputPanel);
 
@@ -119,61 +122,64 @@ public class CDListForm extends JFrame {
 
     }
 
-    public void displayAllCDs() {
+    public void showAllCDs() {
+        
         /*for (int i = 0; i < CDs.size(); i++) {
             CDs.get(i).print();
         }*/
         int selectedIndex = cdList.getSelectedIndex();
-        CD cd = CDs.get(selectedIndex);
-        JOptionPane.showMessageDialog(this,
-                "CD ID: " + cd.getCDId()
-                + "\nCD Title: " + cd.getTitle()
-                + "\nCD Collection: " + cd.getCDcollection()
-                + "\nCD Type: " + cd.getCDtype()
-                + "\nCD Price: " + cd.getPrice()
-                + "\nCD Year of Release: " + cd.getYearOfRelease()
-        );
+        if (selectedIndex != -1) {
+            CD cd1 = CDs.get(selectedIndex);
+            JOptionPane.showMessageDialog(this,
+                    "CD ID: " + cd1.getCDId()
+                    + "\nCD Title: " + cd1.getTitle()
+                    + "\nCD Collection: " + cd1.getCDcollection()
+                    + "\nCD Type: " + cd1.getCDtype()
+                    + "\nCD Price: " + cd1.getPrice()
+                    + "\nCD Year of Release: " + cd1.getYearOfRelease()
+            );
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a CD to display.");
+        }
 
     }
 
     public void addCDs() {
         String id = idTextField.getText();
         String title = titleTextField.getText();
-        ActionListener[] collection = collectionCombobox.getActionListeners();
-        ActionListener[] vcd = vcdRadioButton.getActionListeners();
-        ActionListener[] cd = cdRadioButton.getActionListeners();
-        double price = Double.parseDouble(priceTextField.getText());
-        int year = Integer.parseInt(yearTextField.getText());
+        String collection = "";
+        String type = "";
+        String priceStr = priceTextField.getText();
+        String yearStr = yearTextField.getText();
 
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "CD ID can not be empty");
-            return;
-        } else if (title.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "CD Title can not be empty");
-            return;
-        }
-        else if(Double.parseDouble(priceTextField.getText())) {
-            //Double.parseDouble(priceTextField.getText());
-            JOptionPane.showMessageDialog(this, "CD Price should be numbers");
-            return;
-        } catch (NumberFormatException e) {
-
-        }
         try {
-            Double.parseDouble(yearTextField.getText());
-            JOptionPane.showMessageDialog(this, "CD Year of Release should be numbers");
-            return;
-        } catch (NumberFormatException e) {
+            double price = Double.parseDouble(priceStr);
+            int year = Integer.parseInt(yearStr);
+
+            if (!id.isEmpty() && !title.isEmpty()) {
+                if (vcdRadioButton.isSelected()) {
+                    type = "VCD";
+                } else if (cdRadioButton.isSelected()) {
+                    type = "CD";
+                }
+                if (collectionCombobox.getSelectedIndex() != -1) {
+                    collection = (String) collectionCombobox.getItemAt(collectionCombobox.getSelectedIndex());
+                }
+                CD cd2 = new CD(id, title, collection, type, price, year);
+                CDs.add(cd2);
+                JOptionPane.showMessageDialog(this, "Add successful.");
+                saveCDs();
+                clearFields();
+            } else {
+                JOptionPane.showMessageDialog(this, "CD ID and CD Title can not be empty.");
+                return;
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "CD Price and CD Year of Release must be numbers.");
 
         }
-
-       // CD cd2 = new CD(id, title, collection, vcd, cd, price, year);
-
-        //CDs.add(cd2);
-        //listModel.addElement(cd2.getCDId());
-
-        saveCDs();
-        clearFields();
 
     }
 
@@ -192,7 +198,7 @@ public class CDListForm extends JFrame {
 
     }
 
-    String fileName = "CD.Dat";
+    /*String fileName = "CD.Dat";
 
     public void saveCDs() {
         try {
@@ -203,9 +209,16 @@ public class CDListForm extends JFrame {
         } catch (IOException e) {
             System.out.println("Error save file" + e.getMessage());
         }
+    }*/
+    private void saveCDs() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("CDs.dat"))) {
+            oos.writeObject(CDs);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving CDs to file.");
+        }
     }
 
-    public void loadCDs() {
+    /*public void loadCDs() {
         try {
             FileInputStream f = new FileInputStream(fileName);
             ObjectInputStream inStream = new ObjectInputStream(f);
@@ -217,6 +230,16 @@ public class CDListForm extends JFrame {
             System.out.println("Error load file");
         }
 
+    }*/
+    private void loadCDs() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("CDs.dat"))) {
+            CDs = (ArrayList<CD>) ois.readObject();
+            for (CD employee : CDs) {
+                listModel.addElement(employee.getCDId());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Error loading CDs from file.");
+        }
     }
 
 }

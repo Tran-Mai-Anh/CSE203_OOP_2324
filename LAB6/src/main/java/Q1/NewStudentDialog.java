@@ -4,6 +4,16 @@
  */
 package Q1;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author maianhtran
@@ -13,8 +23,13 @@ public class NewStudentDialog extends javax.swing.JFrame {
     /**
      * Creates new form NewStudentDialog
      */
+    StudentManager studentManager = new StudentManager();
+
     public NewStudentDialog() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        loadStudents(studentManager.listStudent );
     }
 
     /**
@@ -59,7 +74,6 @@ public class NewStudentDialog extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(31, 108, 0, 0);
         getContentPane().add(studentIDLabel, gridBagConstraints);
 
-        studentIDField.setText("jTextField1");
         studentIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentIDFieldActionPerformed(evt);
@@ -86,8 +100,6 @@ public class NewStudentDialog extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(31, 16, 0, 0);
         getContentPane().add(nameLabel, gridBagConstraints);
-
-        lastNameField.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -99,7 +111,6 @@ public class NewStudentDialog extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(31, 13, 0, 0);
         getContentPane().add(lastNameField, gridBagConstraints);
 
-        midNameField.setText("jTextField1");
         midNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 midNameFieldActionPerformed(evt);
@@ -115,8 +126,6 @@ public class NewStudentDialog extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(31, 18, 0, 0);
         getContentPane().add(midNameField, gridBagConstraints);
-
-        firstNameField.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 23;
         gridBagConstraints.gridy = 2;
@@ -139,8 +148,6 @@ public class NewStudentDialog extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 16, 0, 0);
         getContentPane().add(yearOfBirthLabel, gridBagConstraints);
-
-        yearOfBirthField.setText("jTextField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -187,6 +194,11 @@ public class NewStudentDialog extends javax.swing.JFrame {
 
         saveButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -199,6 +211,11 @@ public class NewStudentDialog extends javax.swing.JFrame {
 
         clearButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 8;
@@ -210,6 +227,11 @@ public class NewStudentDialog extends javax.swing.JFrame {
 
         cancelButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 8;
@@ -231,40 +253,70 @@ public class NewStudentDialog extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_studentIDFieldActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        String studentID = studentIDField.getText();
+        String lastName = lastNameField.getText();
+        String midName = midNameField.getText();
+        String firstName = firstNameField.getText();
+        int yearOfBirth = Integer.parseInt(yearOfBirthField.getText());
+        String gender = "";
+        String schoolStage = "";
+
+        if (maleRadioButton.isSelected()) {
+            gender = "Male";
+        } else if (femaleRadioButton.isSelected()) {
+            gender = "Female";
+        } else if (schoolStageComboBox.getSelectedIndex() != -1) {
+            schoolStage = (String) schoolStageComboBox.getItemAt(schoolStageComboBox.getSelectedIndex());
+        }
+
+        Student stu = new Student(studentID, lastName, midName, firstName, yearOfBirth, gender, schoolStage);
+        if (studentManager.addStudent(stu)) {
+            JOptionPane.showMessageDialog(this, "Add student ID successful.");
+            studentManager.getListStudent().add(stu);
+            JOptionPane.showMessageDialog(this, "Adding a new student successful.");
+            saveStudents(studentManager.listStudent);
+        } else {
+            JOptionPane.showMessageDialog(this, "Student ID is already exist int the database.");
+            
+        }
+
+
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        studentIDField.setText("");
+        lastNameField.setText("");
+        midNameField.setText("");
+        firstNameField.setText("");
+        yearOfBirthField.setText("");
+        bg.clearSelection();
+        schoolStageComboBox.setSelectedIndex(0);
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    public void saveStudents(ArrayList<Student>student) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students.dat"))) {
+            oos.writeObject(student);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving  students to file.");
+        }
+    }
+
+    public void loadStudents(ArrayList<Student>student) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.dat"))) {
+            student= (ArrayList<Student>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Error loading students from file.");
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewStudentDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewStudentDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewStudentDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewStudentDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewStudentDialog().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bg;

@@ -1,6 +1,7 @@
 package Q1;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -92,5 +93,5 @@ public class Student  implements Serializable{
     }
     
     
-
+    
 }

@@ -7,6 +7,7 @@ package Q1;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -16,18 +17,35 @@ import javax.swing.JOptionPane;
  * @author maianhtran
  */
 public class StudentManager extends Student {
-    static Scanner sc=new Scanner(System.in);
 
-    Vector<Student>studentList=new Vector<>();
-    
+    static Scanner sc = new Scanner(System.in);
+
+    ArrayList<Student> listStudent = new ArrayList<>();
+
     public StudentManager() {
 
     }
 
-    public Student findStudentById(String studentID){
-        
+    public Student findStudentById(String studentID) {
+        for (Student stu : listStudent) {
+            if (studentID.equalsIgnoreCase(stu.getStudentID())) {
+                return stu;
+            }
+        }
         return null;
     }
+
+    public boolean addStudent(Student stu) {
+        for (Student s : listStudent) {
+            if (stu.getStudentID().equalsIgnoreCase(s.getStudentID())) {
+                return false;
+            }
+        }
+        return true;
+    }
     
-    
+    public ArrayList<Student> getListStudent(){   
+        return listStudent;
+    }
+
 }

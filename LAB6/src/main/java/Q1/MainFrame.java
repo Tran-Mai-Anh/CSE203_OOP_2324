@@ -4,6 +4,18 @@
  */
 package Q1;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author maianhtran
@@ -13,8 +25,14 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    StudentManager studentManager = new StudentManager();
+    NewStudentDialog newStuDia = new NewStudentDialog();
+
     public MainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        newStuDia.loadStudents(studentManager.listStudent);
     }
 
     /**
@@ -36,6 +54,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         checkTotalStudentButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         checkTotalStudentButton.setText("Check total Student");
+        checkTotalStudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkTotalStudentButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -68,40 +91,19 @@ public class MainFrame extends javax.swing.JFrame {
         new NewStudentDialog().setVisible(true);
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
+    private void checkTotalStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTotalStudentButtonActionPerformed
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.dat"))) {
+            studentManager.listStudent = (ArrayList<Student>) ois.readObject();
+            JOptionPane.showMessageDialog(this, "There are " + studentManager.listStudent.size() + " students in the database");
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Error loading students from file.");
+        }
+
+    }//GEN-LAST:event_checkTotalStudentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkTotalStudentButton;

@@ -9,7 +9,6 @@ package Q3;
  * @author maianhtran
  */
 import Q3.CD;
-import Q1.Student;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -22,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,6 +39,7 @@ public class CDListForm extends JFrame {
     private JList<String> cdList;
     private DefaultListModel<String> listModel;
     private ArrayList<CD> cds;
+   
 
     public CDListForm() {
         setTitle("Quach Tinh_CD Store");
@@ -47,7 +48,7 @@ public class CDListForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel inputPanel = new JPanel();
-        JPanel mainPanel=new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
         String[] c = {"game", "movie", "music"};
 
@@ -108,7 +109,7 @@ public class CDListForm extends JFrame {
         addButton.setFont(new Font("Arial", Font.BOLD, 15));
         clearButton.setFont(new Font("Arial", Font.BOLD, 15));
         showAllButton.setFont(new Font("Arial", Font.BOLD, 15));
-        
+
         mainPanel.add(listScrollPane, BorderLayout.CENTER);
 
         addButton.addActionListener(e -> addCDs());
@@ -124,25 +125,11 @@ public class CDListForm extends JFrame {
 
     public void showAllCDs() {
         
-        /*for (int i = 0; i < CDs.size(); i++) {
-            CDs.get(i).print();
+
+        /*for(String[]rowData: dataList){
+            model.addRow(rowData);
         }*/
-        int selectedIndex = cdList.getSelectedIndex();
-        if (selectedIndex != -1) {
-            CD cd1 = CDs.get(selectedIndex);
-            JOptionPane.showMessageDialog(this,
-                    "CD ID: " + cd1.getCDId()
-                    + "\nCD Title: " + cd1.getTitle()
-                    + "\nCD Collection: " + cd1.getCDcollection()
-                    + "\nCD Type: " + cd1.getCDtype()
-                    + "\nCD Price: " + cd1.getPrice()
-                    + "\nCD Year of Release: " + cd1.getYearOfRelease()
-            );
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a CD to display.");
-        }
-
+        new showAllCDs(CDs).setVisible(true);
     }
 
     public void addCDs() {

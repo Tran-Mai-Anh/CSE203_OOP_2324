@@ -4,6 +4,7 @@
  */
 package Q1;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,7 +15,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,12 +29,15 @@ public class MainFrame extends javax.swing.JFrame {
      */
     StudentManager studentManager = new StudentManager();
     NewStudentDialog newStuDia = new NewStudentDialog();
-
+    private DefaultTableModel tableModel;
+    
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
-
+        
         newStuDia.loadStudents(studentManager.listStudent);
+        fillInStudentTable();
+        
     }
 
     /**
@@ -45,12 +50,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         checkTotalStudentButton = new javax.swing.JButton();
         newStudentButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management");
         getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         checkTotalStudentButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         checkTotalStudentButton.setText("Check total Student");
@@ -59,14 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
                 checkTotalStudentButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 19;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 31, 184, 0);
-        getContentPane().add(checkTotalStudentButton, gridBagConstraints);
+        jPanel1.add(checkTotalStudentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 41, -1, -1));
 
         newStudentButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         newStudentButton.setText("New Student");
@@ -75,24 +79,59 @@ public class MainFrame extends javax.swing.JFrame {
                 newStudentButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(newStudentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 41, -1, -1));
+
+        refreshButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(529, 41, -1, -1));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 66;
-        gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 46, 184, 45);
-        getContentPane().add(newStudentButton, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(15, 126, 0, 159);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 567;
+        gridBagConstraints.ipady = 407;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(8, 169, 0, 159);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void newStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newStudentButtonActionPerformed
         new NewStudentDialog().setVisible(true);
+
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
     private void checkTotalStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTotalStudentButtonActionPerformed
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.dat"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.Dat"))) {
             studentManager.listStudent = (ArrayList<Student>) ois.readObject();
             JOptionPane.showMessageDialog(this, "There are " + studentManager.listStudent.size() + " students in the database");
         } catch (IOException | ClassNotFoundException e) {
@@ -101,12 +140,33 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_checkTotalStudentButtonActionPerformed
 
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        
+
+    }//GEN-LAST:event_refreshButtonActionPerformed
+    
+    private void fillInStudentTable() {
+        newStuDia.saveStudents(studentManager.getListStudent());
+        tableModel.setRowCount(0);
+        for (Student s : studentManager.listStudent) {
+            Object[] rows = new Object[]{
+                s.getStudentID(), s.getFirstName(), s.getLastName(), s.getGender(), s.getSchoolStage()
+            };
+            tableModel.addRow(rows);
+        }
+        jTable1.setModel(tableModel);
+        pack();
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkTotalStudentButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton newStudentButton;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
 }

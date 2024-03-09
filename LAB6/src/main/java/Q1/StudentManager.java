@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class StudentManager extends Student {
 
+    StudentTableModel studentTableModel = new StudentTableModel();
+
     static Scanner sc = new Scanner(System.in);
 
     ArrayList<Student> listStudent = new ArrayList<>();
@@ -43,9 +45,13 @@ public class StudentManager extends Student {
         }
         return true;
     }
-    
-    public ArrayList<Student> getListStudent(){   
+
+    public ArrayList<Student> getListStudent() {
         return listStudent;
+    }
+
+    public StudentTableModel getStudentTableModel() {
+        return studentTableModel;
     }
 
 }

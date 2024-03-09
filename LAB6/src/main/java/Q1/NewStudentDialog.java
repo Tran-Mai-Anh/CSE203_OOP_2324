@@ -276,12 +276,12 @@ public class NewStudentDialog extends javax.swing.JFrame {
             studentManager.getListStudent().add(stu);
             JOptionPane.showMessageDialog(this, "Adding a new student successful.");
             saveStudents(studentManager.listStudent);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Student ID is already exist int the database.");
             
         }
-
-
+        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
@@ -299,7 +299,7 @@ public class NewStudentDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     public void saveStudents(ArrayList<Student>student) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students.dat"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students.Dat"))) {
             oos.writeObject(student);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving  students to file.");
@@ -307,7 +307,7 @@ public class NewStudentDialog extends javax.swing.JFrame {
     }
 
     public void loadStudents(ArrayList<Student>student) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.dat"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.Dat"))) {
             student= (ArrayList<Student>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading students from file.");

@@ -125,10 +125,6 @@ public class CDListForm extends JFrame {
 
     public void showAllCDs() {
         
-
-        /*for(String[]rowData: dataList){
-            model.addRow(rowData);
-        }*/
         new showAllCDs(CDs).setVisible(true);
     }
 
@@ -185,18 +181,7 @@ public class CDListForm extends JFrame {
 
     }
 
-    /*String fileName = "CD.Dat";
-
-    public void saveCDs() {
-        try {
-            FileOutputStream f = new FileOutputStream(fileName);
-            ObjectOutputStream oStream = new ObjectOutputStream(f);
-            oStream.writeObject(CDs);
-            oStream.close();
-        } catch (IOException e) {
-            System.out.println("Error save file" + e.getMessage());
-        }
-    }*/
+   
     private void saveCDs() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("CDs.dat"))) {
             oos.writeObject(CDs);
@@ -205,19 +190,7 @@ public class CDListForm extends JFrame {
         }
     }
 
-    /*public void loadCDs() {
-        try {
-            FileInputStream f = new FileInputStream(fileName);
-            ObjectInputStream inStream = new ObjectInputStream(f);
-            CDs = (ArrayList<CD>) inStream.readObject();
-            inStream.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class not found");
-        } catch (IOException e) {
-            System.out.println("Error load file");
-        }
-
-    }*/
+   
     private void loadCDs() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("CDs.dat"))) {
             CDs = (ArrayList<CD>) ois.readObject();

@@ -2,10 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Q1;
+package LAB6;
 
+import java.awt.List;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,7 +35,15 @@ public class NewStudentDialog extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        loadStudents(studentManager.listStudent );
+        // loadStudents(studentManager.listStudent );
+    }
+
+    public NewStudentDialog(StudentManager studentManager) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.studentManager = studentManager;
+
+        // loadStudents(studentManager.listStudent );
     }
 
     /**
@@ -266,7 +280,8 @@ public class NewStudentDialog extends javax.swing.JFrame {
             gender = "Male";
         } else if (femaleRadioButton.isSelected()) {
             gender = "Female";
-        } else if (schoolStageComboBox.getSelectedIndex() != -1) {
+        }
+        if (schoolStageComboBox.getSelectedIndex() != -1) {
             schoolStage = (String) schoolStageComboBox.getItemAt(schoolStageComboBox.getSelectedIndex());
         }
 
@@ -275,13 +290,11 @@ public class NewStudentDialog extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Add student ID successful.");
             studentManager.getListStudent().add(stu);
             JOptionPane.showMessageDialog(this, "Adding a new student successful.");
-            saveStudents(studentManager.listStudent);
-            
+            saveStudents();
+
         } else {
             JOptionPane.showMessageDialog(this, "Student ID is already exist int the database.");
-            
         }
-        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
@@ -298,17 +311,17 @@ public class NewStudentDialog extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    public void saveStudents(ArrayList<Student>student) {
+    public void saveStudents() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students.Dat"))) {
-            oos.writeObject(student);
+            oos.writeObject(studentManager.getListStudent());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving  students to file.");
         }
     }
 
-    public void loadStudents(ArrayList<Student>student) {
+    public void loadStudents() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.Dat"))) {
-            student= (ArrayList<Student>) ois.readObject();
+            studentManager.listStudent = (ArrayList<Student>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading students from file.");
         }

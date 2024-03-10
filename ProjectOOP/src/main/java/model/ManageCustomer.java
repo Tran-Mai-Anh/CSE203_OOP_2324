@@ -12,7 +12,11 @@ import java.util.ArrayList;
  */
 public class ManageCustomer {
 
-    private ArrayList<Customer> listCustomer = new ArrayList<>();
+    protected ArrayList<Customer> listCustomer = new ArrayList<>();
+    
+    public ManageCustomer(){
+        
+    }
 
     public ArrayList<Customer> getListCustomer() {
         return listCustomer;
@@ -20,10 +24,6 @@ public class ManageCustomer {
 
     public void setListCustomer(ArrayList<Customer> listCustomer) {
         this.listCustomer = listCustomer;
-    }
-
-    public ManageCustomer() {
-        this.listCustomer = new ArrayList<>();
     }
 
     public void addCustomer(Customer c) {

@@ -1,4 +1,4 @@
-package Q1;
+package LAB6;
 
 import java.io.Serializable;
 import java.util.Scanner;

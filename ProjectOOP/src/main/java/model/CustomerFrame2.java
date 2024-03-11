@@ -18,19 +18,19 @@ public class CustomerFrame2 extends javax.swing.JFrame {
     /**
      * Creates new form BookInformation
      */
-     java.awt.event.ActionEvent evt;
+    java.awt.event.ActionEvent evt;
     ManageCustomer manageCustomer = new ManageCustomer();
-    
+
     public CustomerFrame2() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         loadCustomers();
         fillInCustomerTable();
         customerTable.putClientProperty("JTable.autoStartsEdit", Boolean.FALSE);
-        
+
     }
 
     /**
@@ -238,7 +238,7 @@ public class CustomerFrame2 extends javax.swing.JFrame {
         String address = addressField.getText();
         String phoneNumber = phoneNumberField.getText();
         String email = emailField.getText();
-        
+
         try {
             int phone = Integer.parseInt(phoneNumber);
             if (!fullName.isEmpty() && !customerID.isEmpty()) {
@@ -251,12 +251,12 @@ public class CustomerFrame2 extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Customert ID is already exist.");
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Customer ID and full name can not be empty.");
                 return;
             }
-            
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Phone number must be numbers.");
         }
@@ -275,14 +275,14 @@ public class CustomerFrame2 extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-        
+
         int deleteIndex = customerTable.getSelectedRow();
         if (deleteIndex != -1) {
             int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?",
                     "Confirmation", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 manageCustomer.getListCustomer().remove(deleteIndex);
-                
+
             }
             saveCustomers();
             fillInCustomerTable();
@@ -291,7 +291,7 @@ public class CustomerFrame2 extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
-        addButtonActionPerformed( evt);
+        addButtonActionPerformed(evt);
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
@@ -332,10 +332,10 @@ public class CustomerFrame2 extends javax.swing.JFrame {
             Object[] rows = new Object[]{c.getCustomerID(), c.getCustomerName(), c.getPhoneNumber(), c.getAddress(), c.getEmail()};
             model.addRow(rows);
         }
-        
+
         pack();
     }
-    
+
     private void clearButton() {
         customerIDField.setText("");
         fullNameField.setText("");
@@ -343,7 +343,7 @@ public class CustomerFrame2 extends javax.swing.JFrame {
         phoneNumberField.setText("");
         emailField.setText("");
     }
-    
+
     private void saveCustomers() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Customers.Dat"))) {
             oos.writeObject(manageCustomer.listCustomer);
@@ -351,20 +351,20 @@ public class CustomerFrame2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error saving customers to file.");
         }
     }
-    
+
     private void loadCustomers() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Customers.Dat"))) {
             manageCustomer.listCustomer = (ArrayList<Customer>) ois.readObject();
-            
+
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading customers from file.");
         }
     }
-    
+
     public static void main(String args[]) {
-        
+
         new CustomerFrame2().setVisible(true);
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

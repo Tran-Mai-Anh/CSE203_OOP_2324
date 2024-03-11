@@ -321,7 +321,7 @@ public class NewStudentDialog extends javax.swing.JFrame {
 
     public void loadStudents() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.Dat"))) {
-            studentManager.listStudent = (ArrayList<Student>) ois.readObject();
+            studentManager.setListStudent((ArrayList<Student>)ois.readObject());
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading students from file.");
         }

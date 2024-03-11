@@ -20,8 +20,8 @@ public class StudentManager extends Student {
 
     StudentTableModel studentTableModel = new StudentTableModel();
 
-    protected ArrayList<Student> listStudent = new ArrayList<>();
-
+    private ArrayList<Student> listStudent = new ArrayList<>();
+    
     public StudentManager() {
 
     }
@@ -46,6 +46,10 @@ public class StudentManager extends Student {
 
     public ArrayList<Student> getListStudent() {
         return listStudent;
+    }
+
+    public void setListStudent(ArrayList<Student> listStudent) {
+        this.listStudent = listStudent;
     }
 
     public StudentTableModel getStudentTableModel() {

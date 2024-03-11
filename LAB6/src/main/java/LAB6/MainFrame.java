@@ -162,7 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void checkTotalStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTotalStudentButtonActionPerformed
         // try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.Dat"))) {
         //     studentManager.listStudent = (ArrayList<Student>) ois.readObject();
-        JOptionPane.showMessageDialog(this, "There are " + studentManager.listStudent.size() + " students in the database.");
+        JOptionPane.showMessageDialog(this, "There are " + studentManager.getListStudent().size() + " students in the database.");
         //  } catch (IOException | ClassNotFoundException e) {
         //      JOptionPane.showMessageDialog(this, "Error loading students from file.");
         //   }
@@ -183,7 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         //Add row
 
-        for (Student s : studentManager.listStudent) {
+        for (Student s : studentManager.getListStudent()) {
             Object[] rows = new Object[]{s.getStudentID(), s.getFirstName(), s.getLastName(), s.getGender(), s.getSchoolStage()};
             model.addRow(rows);
         }
@@ -211,7 +211,7 @@ public class MainFrame extends javax.swing.JFrame {
                         int choice = JOptionPane.showConfirmDialog(null, "Do you want to delete this student?",
                                 "Confirmation", JOptionPane.YES_NO_OPTION);
                         if (choice == JOptionPane.YES_OPTION) {
-                            studentManager.listStudent.remove(selectedRow);
+                            studentManager.getListStudent().remove(selectedRow);
 
                         }
                         newStuDia.saveStudents();

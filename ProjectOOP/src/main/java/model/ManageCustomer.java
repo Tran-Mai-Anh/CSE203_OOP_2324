@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class ManageCustomer {
 
-    protected ArrayList<Customer> listCustomer = new ArrayList<>();
+    private ArrayList<Customer> listCustomer = new ArrayList<>();
     
     public ManageCustomer(){
         

@@ -1,6 +1,7 @@
 package com.lab7;
 
 import java.io.*;
+import static java.lang.Character.isDigit;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.*;
@@ -21,12 +22,11 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
      */
     //ArrayList<CD> CDs = new ArrayList<>();
     CDManager cdManager;
-    
 
     public CDStore(CDManager cdManager) {
         initComponents();
         setLocationRelativeTo(null);
-        
+
         this.setVisible(true);
         this.cdManager = cdManager;
         loadCDs("CDs.DAT");
@@ -96,7 +96,10 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
 
         manageTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "Title", "Collection", "Type", "Price"
@@ -167,7 +170,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newCDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCDButtonActionPerformed
-        new NewCD(this, true,cdManager).setVisible(true);
+        new NewCD(this, true, cdManager).setVisible(true);
         this.setVisible(false);
         //loadCDs();
         //fillInCDTable();
@@ -199,30 +202,82 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             File file = fileChooser.getSelectedFile();
             System.out.print("Save as file: " + file.getAbsolutePath());
         }
+        /*JFileChooser fileChooser = new JFileChooser();
+    int result = fileChooser.showSaveDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            for (int i = 0; i < manageTable.getRowCount(); i++) {
+                for (int j = 0; j < manageTable.getColumnCount(); j++) {
+                    writer.write((String) manageTable.getValueAt(i, j));
+                    if (j < manageTable.getColumnCount() - 1) {
+                        writer.write(",");
+                    }
+                }
+                writer.newLine();
+            }
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Backup successful");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error during backup: " + e.getMessage());
+        }
+    }*/
 
     }//GEN-LAST:event_backupButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        String select = (String) this.searchComboBox.getItemAt(this.searchComboBox.getSelectedIndex());
-        String search = searchField.getText();
-        ArrayList<CD> sort = new ArrayList<>();
-        switch (select) {
-            case "Title":
-                sort = searchByTitle(search);
-                break;
-            case "Collection":
-                sort = searchByCollection(search);
-                break;
-            case "Type":
-                sort = searchByType(search);
-                break;
-            case "Price":
-                double price = Double.parseDouble(search);
-                sort = searchByPrice(price);
-                break;
 
+        /*String select = (String) searchComboBox.getSelectedItem();
+        String searchText = searchField.getText();
+        
+        if(!searchText.isEmpty()){
+            for(int row=0; row<manageTable.getRowCount();row++){
+                Object value=manageTable.getValueAt(row, searchComboBox.getSelectedIndex());
+                if(value.toString().equalsIgnoreCase(searchText)){
+                    manageTable.getSelectionModel().setSelectionInterval(row, row);
+                    break;
+                }
+            }
         }
-        fillInCDTable();
+        else if(searchText !=null){
+            JOptionPane.showMessageDialog(this, "Can not find .");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Search text can not be empty.");
+        }*/
+        /*String title, collection, type, price;
+        String searchText = this.searchField.getText();
+
+        if (this.searchComboBox.getSelectedItem() == "Title") {
+            title = this.searchField.getText();
+            ArrayList<CD> listSearchTitle = this.cdManager.getListCDByTitle(title);
+            fillInCDTable();
+        }
+
+        if (this.searchComboBox.getSelectedItem() == "Collection") {
+            collection = this.searchField.getText();
+            ArrayList<CD> listSearchCollection = this.cdManager.getListCDByCollection(collection);
+            fillInCDTable();
+        }
+
+        if (this.searchComboBox.getSelectedItem() == "Type") {
+            type = this.searchField.getText();
+            ArrayList<CD> listSearchType = this.cdManager.getListCDByType(type);
+            fillInCDTable();
+        }
+
+        try {
+            if (this.searchComboBox.getSelectedItem().equals("Price")) {
+                double price1 = Double.parseDouble(this.searchField.getText());
+                ArrayList<CD> listSearchPrice = this.cdManager.getListCDByPrice(price1);
+                fillInCDTable();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Price does not exist.");
+        }*/
+
 
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -240,46 +295,6 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     /**
      * @param args the command line arguments
      */
-    private ArrayList<CD> searchByTitle(String search) {
-        ArrayList<CD> sort = new ArrayList<>();
-        for (CD cd : cdManager.getListCD()) {
-            if (cd.getTitle().compareToIgnoreCase(search) == 0) {
-                sort.add(cd);
-            }
-        }
-        return sort;
-    }
-
-    private ArrayList<CD> searchByCollection(String search) {
-        ArrayList<CD> sort = new ArrayList<>();
-        for (CD cd : cdManager.getListCD()) {
-            if (cd.getCollection().compareToIgnoreCase(search) == 0) {
-                sort.add(cd);
-            }
-        }
-        return sort;
-    }
-
-    private ArrayList<CD> searchByType(String search) {
-        ArrayList<CD> sort = new ArrayList<>();
-        for (CD cd : cdManager.getListCD()) {
-            if (cd.getType().compareToIgnoreCase(search) == 0) {
-                sort.add(cd);
-            }
-        }
-        return sort;
-    }
-
-    private ArrayList<CD> searchByPrice(double search1) {
-        ArrayList<CD> sort = new ArrayList<>();
-        for (CD cd : cdManager.getListCD()) {
-            if (cd.getPrice() == search1) {
-                sort.add(cd);
-            }
-        }
-        return sort;
-    }
-
     /*private void saveCDs() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("CDs.Dat"))) {
             oos.writeObject(cdManager.getListCD());
@@ -349,16 +364,16 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
         //CD(String id, String title, String collection, String type, double price, int year) 
         for (CD cd : cdManager.getListCD()) {
             rowS = new Vector<>();
-            
+
             rowS.add(cd.getTitle());
             rowS.add(cd.getCollection());
             rowS.add(cd.getType());
             rowS.add(cd.getPrice());
-            
+
             model.addRow(rowS);
         }
         this.setVisible(true);
-        
+
     }
 
     private void fillListCD(ArrayList<CD> sort) {

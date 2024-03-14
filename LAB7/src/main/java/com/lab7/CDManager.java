@@ -24,16 +24,15 @@ public class CDManager extends CD {
         this.listCD = new ArrayList<CD>();
     }
 
-    public CD findCDById(String studentID) {
+    /*public CD findCDById(String studentID) {
         for (CD cd : listCD) {
             if (studentID.equalsIgnoreCase(cd.getId())) {
                 return cd;
             }
         }
         return null;
-    }
-
-    public boolean addCD(CD stu) {
+    }*/
+    private boolean addCD(CD stu) {
         for (CD cd : listCD) {
             if (cd.getId().equalsIgnoreCase(cd.getId())) {
                 return false;
@@ -48,6 +47,55 @@ public class CDManager extends CD {
 
     public void setListCD(ArrayList<CD> listCD) {
         this.listCD = listCD;
+    }
+
+    public ArrayList<CD> getListCDByTitle(String title) {
+        ArrayList<CD> result = new ArrayList<>();
+        CD cd;
+        for (int i = 0; i < listCD.size(); i++) {
+            cd = listCD.get(i);
+            if (cd.getTitle().contains(title)) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<CD> getListCDByCollection(String collection) {
+        ArrayList<CD> result = new ArrayList<>();
+        CD cd;
+        for (int i = 0; i < listCD.size(); i++) {
+            cd = listCD.get(i);
+            if (cd.getCollection().contains(collection)) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<CD> getListCDByType(String type) {
+        ArrayList<CD> result = new ArrayList<>();
+        CD cd;
+        for (int i = 0; i < listCD.size(); i++) {
+            cd = listCD.get(i);
+            if (cd.getType().contains(type)) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<CD> getListCDByPrice(double price) {
+
+        ArrayList<CD> result = new ArrayList<>();
+        CD cd;
+        for (int i = 0; i < listCD.size(); i++) {
+            cd = listCD.get(i);
+            if (cd.getPrice() == price) {
+                result.add(cd);
+            }
+        }
+        return result;
     }
 
 }

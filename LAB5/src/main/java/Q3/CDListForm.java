@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CDListForm extends JFrame {
 
-    ArrayList<CD> CDs = new ArrayList<>();
+    private ArrayList<CD> CDs = new ArrayList<>();
 
     private JTextField idTextField, titleTextField, priceTextField, yearTextField;
     private JRadioButton vcdRadioButton, cdRadioButton;
@@ -39,7 +39,6 @@ public class CDListForm extends JFrame {
     private JList<String> cdList;
     private DefaultListModel<String> listModel;
     private ArrayList<CD> cds;
-   
 
     public CDListForm() {
         setTitle("Quach Tinh_CD Store");
@@ -124,7 +123,7 @@ public class CDListForm extends JFrame {
     }
 
     public void showAllCDs() {
-        
+
         new showAllCDs(CDs).setVisible(true);
     }
 
@@ -181,7 +180,6 @@ public class CDListForm extends JFrame {
 
     }
 
-   
     private void saveCDs() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("CDs.dat"))) {
             oos.writeObject(CDs);
@@ -190,12 +188,11 @@ public class CDListForm extends JFrame {
         }
     }
 
-   
     private void loadCDs() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("CDs.dat"))) {
             CDs = (ArrayList<CD>) ois.readObject();
-            for (CD employee : CDs) {
-                listModel.addElement(employee.getCDId());
+            for (CD c : CDs) {
+                listModel.addElement(c.getCDId());
             }
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading CDs from file.");

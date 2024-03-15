@@ -51,17 +51,16 @@ public class ManageCustomer {
         }
         return true;
     }
-
-    /*public void editCustomer(Customer newCustomer) {
-        Customer oldCustomer = findCustomer(newCustomer.getCustomerID());
-        boolean flag = searchCustomerByID(newCustomer.getCustomerID());
-        if (flag) {
-            oldCustomer.setCustomerName(newCustomer.getCustomerName());
-            oldCustomer.setAddress(newCustomer.getAddress());
-            oldCustomer.setPhoneNumber(newCustomer.getPhoneNumber());
-            oldCustomer.setEmail(newCustomer.getEmail());
+    
+    public Customer searchCustomerByID(String id) {
+        for (Customer c : listCustomer) {
+            if (c.getCustomerID().equalsIgnoreCase(c.getCustomerID())) {
+                return c;
+            }
         }
-    }*/
+        return null;
+    }
+
 
     public ArrayList<Customer> searchCustomerByName(String name) {
         ArrayList<Customer> listC = new ArrayList<>();

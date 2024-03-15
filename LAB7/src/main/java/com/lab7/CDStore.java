@@ -203,7 +203,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void backupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButtonActionPerformed
-        /*JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser();
         int select = fileChooser.showSaveDialog(this);
 
         if (select == JFileChooser.APPROVE_OPTION) {
@@ -212,8 +212,8 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             saveCDs("CDs.Dat");
             JOptionPane.showMessageDialog(this, "Backup successful.");
             System.out.print("Save as file: " + file.getAbsolutePath());
-        }*/
-        JFileChooser fileChooser = new JFileChooser();
+        }
+        /*JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Specify a file to save");
 
         int userSelection = fileChooser.showSaveDialog(this);
@@ -230,7 +230,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error during backup: " + e.getMessage());
             }
-        }
+        }*/
     }//GEN-LAST:event_backupButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -270,15 +270,15 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void restoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreButtonActionPerformed
-        /*JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.print("Selected file: " + selectedFile.getAbsolutePath());
-        }*/
+        }
 
-        JFileChooser fileChooser = new JFileChooser();
+        /*JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose a file to restore from");
 
         int userSelection = fileChooser.showOpenDialog(this);
@@ -294,7 +294,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             } catch (IOException | ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Error during restore: " + e.getMessage());
             }
-        }
+        }*/
 
     }//GEN-LAST:event_restoreButtonActionPerformed
 

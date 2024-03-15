@@ -105,7 +105,7 @@ public class CustomerFrame extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -196,7 +196,7 @@ public class CustomerFrame extends javax.swing.JDialog {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
         fullNameField.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         fullNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(null, "Full name", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Gurmukhi MN", 1, 18), new java.awt.Color(102, 102, 255)), new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 3, true))); // NOI18N

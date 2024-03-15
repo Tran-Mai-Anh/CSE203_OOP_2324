@@ -29,7 +29,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
 
         this.setVisible(true);
         this.cdManager = cdManager;
-        loadCDs("CDs.DAT");
+        loadCDs("CDs.Dat");
         fillInCDTable();
         //this.setVisible(true);
         manageTable.putClientProperty("JTable.autoStartsEdit", Boolean.FALSE);
@@ -44,20 +44,23 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         newCDButton = new javax.swing.JButton();
         backupButton = new javax.swing.JButton();
         restoreButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         manageTable = new javax.swing.JTable();
-        searchButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         searchComboBox = new javax.swing.JComboBox<>();
         searchField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CD Store");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         newCDButton.setText("New CD");
         newCDButton.addActionListener(new java.awt.event.ActionListener() {
@@ -87,13 +90,6 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             }
         });
 
-        deleteButton.setText("Delete");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
-
         manageTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -107,6 +103,15 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
         ));
         jScrollPane1.setViewportView(manageTable);
 
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        searchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Collection", "Type", "Price" }));
+
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,57 +119,59 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             }
         });
 
-        searchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Collection", "Type", "Price" }));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(newCDButton)
-                        .addGap(46, 46, 46)
-                        .addComponent(backupButton)
-                        .addGap(53, 53, 53)
-                        .addComponent(restoreButton)
-                        .addGap(52, 52, 52)
-                        .addComponent(refreshButton)
-                        .addGap(68, 68, 68)
-                        .addComponent(deleteButton)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(searchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(searchField)
-                .addGap(18, 18, 18)
-                .addComponent(searchButton)
-                .addGap(103, 103, 103))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(newCDButton)
+                .addGap(72, 72, 72)
+                .addComponent(backupButton)
+                .addGap(79, 79, 79)
+                .addComponent(restoreButton)
+                .addGap(60, 60, 60)
+                .addComponent(refreshButton)
+                .addGap(75, 75, 75)
+                .addComponent(deleteButton))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(searchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(searchButton))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newCDButton)
-                    .addComponent(deleteButton)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(restoreButton)
+                        .addComponent(backupButton))
                     .addComponent(refreshButton)
-                    .addComponent(restoreButton)
-                    .addComponent(backupButton))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton)))
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 6, 23, 86);
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,7 +192,7 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             if (choice == JOptionPane.YES_OPTION) {
                 cdManager.getListCD().remove(deleteIndex);
             }
-            saveCDs("CDs.DAT");
+            saveCDs("CDs.Dat");
             fillInCDTable();
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -196,89 +203,72 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void backupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backupButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
+        /*JFileChooser fileChooser = new JFileChooser();
         int select = fileChooser.showSaveDialog(this);
+
         if (select == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
+            String fileName = file.getAbsolutePath();
+            saveCDs("CDs.Dat");
+            JOptionPane.showMessageDialog(this, "Backup successful.");
             System.out.print("Save as file: " + file.getAbsolutePath());
-        }
-        /*JFileChooser fileChooser = new JFileChooser();
-    int result = fileChooser.showSaveDialog(this);
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File file = fileChooser.getSelectedFile();
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < manageTable.getRowCount(); i++) {
-                for (int j = 0; j < manageTable.getColumnCount(); j++) {
-                    writer.write((String) manageTable.getValueAt(i, j));
-                    if (j < manageTable.getColumnCount() - 1) {
-                        writer.write(",");
-                    }
-                }
-                writer.newLine();
+        }*/
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getAbsolutePath().endsWith(".Dat")) {
+                fileToSave = new File(fileToSave + ".Dat");
             }
-            writer.close();
-            JOptionPane.showMessageDialog(this, "Backup successful");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error during backup: " + e.getMessage());
+
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileToSave))) {
+                oos.writeObject(cdManager.getListCD()); 
+                JOptionPane.showMessageDialog(this, "Backup was successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error during backup: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }*/
+
 
     }//GEN-LAST:event_backupButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
 
-        /*String select = (String) searchComboBox.getSelectedItem();
-        String searchText = searchField.getText();
-        
-        if(!searchText.isEmpty()){
-            for(int row=0; row<manageTable.getRowCount();row++){
-                Object value=manageTable.getValueAt(row, searchComboBox.getSelectedIndex());
-                if(value.toString().equalsIgnoreCase(searchText)){
-                    manageTable.getSelectionModel().setSelectionInterval(row, row);
-                    break;
-                }
+        DefaultTableModel model = (DefaultTableModel) manageTable.getModel();
+
+        String searchText = searchField.getText().trim();
+
+        ArrayList<CD> searchByTitle = searchByTitle(searchText);
+        ArrayList<CD> searchByCollection = searchByCollection(searchText);
+        ArrayList<CD> searchByType = searchByType(searchText);
+        ArrayList<CD> searchByPrice = searchByPrice(searchText);
+
+        model.setRowCount(0);
+
+        if (searchComboBox.getSelectedIndex() == 0) {
+            for (CD cd : searchByTitle) {
+                Object[] rows = {cd.getTitle(), cd.getCollection(), cd.getType(), cd.getPrice()};
+                model.addRow(rows);
+            }
+        } else if (searchComboBox.getSelectedIndex() == 1) {
+            for (CD cd : searchByCollection) {
+                Object[] rows = {cd.getTitle(), cd.getCollection(), cd.getType(), cd.getPrice()};
+                model.addRow(rows);
+            }
+        } else if (searchComboBox.getSelectedIndex() == 2) {
+            for (CD cd : searchByType) {
+                Object[] rows = {cd.getTitle(), cd.getCollection(), cd.getType(), cd.getPrice()};
+                model.addRow(rows);
+            }
+        } else if (searchComboBox.getSelectedIndex() == 3) {
+            for (CD cd : searchByPrice) {
+                Object[] rows = {cd.getTitle(), cd.getCollection(), cd.getType(), cd.getPrice()};
+                model.addRow(rows);
             }
         }
-        else if(searchText !=null){
-            JOptionPane.showMessageDialog(this, "Can not find .");
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Search text can not be empty.");
-        }*/
-        /*String title, collection, type, price;
-        String searchText = this.searchField.getText();
-
-        if (this.searchComboBox.getSelectedItem() == "Title") {
-            title = this.searchField.getText();
-            ArrayList<CD> listSearchTitle = this.cdManager.getListCDByTitle(title);
-            fillInCDTable();
-        }
-
-        if (this.searchComboBox.getSelectedItem() == "Collection") {
-            collection = this.searchField.getText();
-            ArrayList<CD> listSearchCollection = this.cdManager.getListCDByCollection(collection);
-            fillInCDTable();
-        }
-
-        if (this.searchComboBox.getSelectedItem() == "Type") {
-            type = this.searchField.getText();
-            ArrayList<CD> listSearchType = this.cdManager.getListCDByType(type);
-            fillInCDTable();
-        }
-
-        try {
-            if (this.searchComboBox.getSelectedItem().equals("Price")) {
-                double price1 = Double.parseDouble(this.searchField.getText());
-                ArrayList<CD> listSearchPrice = this.cdManager.getListCDByPrice(price1);
-                fillInCDTable();
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Price does not exist.");
-        }*/
-
-
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void restoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreButtonActionPerformed
@@ -302,6 +292,47 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
             JOptionPane.showMessageDialog(this, "Error saving CDs to file.");
         }
     }*/
+    private ArrayList<CD> searchByTitle(String searchText) {
+        ArrayList<CD> result = new ArrayList<>();
+        for (CD cd : cdManager.getListCD()) {
+            if (cd.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    private ArrayList<CD> searchByCollection(String searchText) {
+        ArrayList<CD> result = new ArrayList<>();
+        for (CD cd : cdManager.getListCD()) {
+            if (cd.getCollection().toLowerCase().contains(searchText.toLowerCase())) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    private ArrayList<CD> searchByType(String searchText) {
+        ArrayList<CD> result = new ArrayList<>();
+        for (CD cd : cdManager.getListCD()) {
+            if (cd.getType().toLowerCase().contentEquals(searchText.toLowerCase())) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
+    private ArrayList<CD> searchByPrice(String searchText) {
+        ArrayList<CD> result = new ArrayList<>();
+        for (CD cd : cdManager.getListCD()) {
+            String price = Double.toString(cd.getPrice());
+            if (price.contains(searchText)) {
+                result.add(cd);
+            }
+        }
+        return result;
+    }
+
     private void loadCDs(String fileName) {
         ArrayList<CD> temp = new ArrayList<>();
         BufferedReader br = null;
@@ -376,24 +407,11 @@ public class CDStore extends javax.swing.JFrame implements Serializable {
 
     }
 
-    private void fillListCD(ArrayList<CD> sort) {
-        DefaultTableModel model = (DefaultTableModel) manageTable.getModel();
-        int rowCount = model.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-
-        for (CD cd : cdManager.getListCD()) {
-            Object[] rows = new Object[]{cd.getTitle(), cd.getCollection(), cd.getType(), cd.getPrice()};
-            model.addRow(rows);
-        }
-        pack();
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backupButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable manageTable;
     private javax.swing.JButton newCDButton;
